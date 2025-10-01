@@ -10,7 +10,7 @@ Production flash loan protocol on Plasma blockchain
 
 [![Website](https://img.shields.io/badge/Website-capacitor.finance-blue)](https://capacitor.finance)
 [![Discord](https://img.shields.io/badge/Discord-Join%20Us-7289da)](https://discord.gg/JPMrHTUMDX)
-[![X](https://img.shields.io/badge/X-@Capacitor--Lending-000000)](https://x.com/Capacitor-Lending)
+[![X](https://img.shields.io/badge/X-@Capacitor--Lending-000000)](https://x.com/CapacitorFI)
 
 [Quick Start](#-quick-start) • [Documentation](#-integration-patterns) • [Examples](#-examples) • [Community](#-community)
 
@@ -530,7 +530,7 @@ Join our growing community of flash loan developers:
 
 - 🌍 **Website**: [capacitor.finance](https://capacitor.finance)
 - 💬 **Discord**: [Join our server](https://discord.gg/JPMrHTUMDX)
-- 🐦 **X (Twitter)**: [@Capacitor-Lending](https://x.com/Capacitor-Lending)
+- 🐦 **X (Twitter)**: [@CapacitorFI](https://x.com/CapacitorFI)
 
 Have questions? Found a bug? Want to share your strategy? We'd love to hear from you!
 
@@ -548,6 +548,6 @@ Educational purposes only. Use at your own risk.
 
 **Built with ⚡ by the Capacitor Team**
 
-[capacitor.finance](https://capacitor.finance) | [Discord](https://discord.gg/JPMrHTUMDX) | [X](https://x.com/Capacitor-Lending)
+[capacitor.finance](https://capacitor.finance) | [Discord](https://discord.gg/JPMrHTUMDX) | [X](https://x.com/CapacitorFI)
 
 </div>
