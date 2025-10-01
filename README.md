@@ -1,49 +1,79 @@
-# Flash Loan Protocol - Integration Guide
+<div align="center">
 
-Production flash loan protocol on Plasma blockchain. Execute arbitrage, liquidations, and DeFi strategies with zero upfront capital.
+<img src="https://i.ibb.co/q3S4Z50J/Capacitor.png" alt="Capacitor Logo" width="200"/>
 
-## Important: Smart Contract Requirement
+# Capacitor Flash Loan Protocol
 
-**Flash loans require deploying a smart contract.** This is not a limitation of our protocol - it's how flash loans work on EVM chains (Ethereum, Polygon, Plasma, etc.).
+**Execute arbitrage, liquidations, and DeFi strategies with zero upfront capital**
 
-### Why You Need a Contract
+Production flash loan protocol on Plasma blockchain
 
-Flash loans involve three steps in ONE atomic transaction:
-1. **Borrow** tokens from the protocol
-2. **Execute** your custom logic (swaps, liquidations, etc.)
-3. **Repay** the loan + fee
+[![Website](https://img.shields.io/badge/Website-capacitor.finance-blue)](https://capacitor.finance)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Us-7289da)](https://discord.gg/JPMrHTUMDX)
+[![X](https://img.shields.io/badge/X-@Capacitor--Lending-000000)](https://x.com/Capacitor-Lending)
 
-This atomic execution requires smart contract code. Your wallet alone cannot do this.
+[Quick Start](#-quick-start) • [Documentation](#-integration-patterns) • [Examples](#-examples) • [Community](#-community)
 
-###Comparison to Other Chains
-
-**Kamino (Solana)**: Solana's transaction model allows composing multiple program instructions in one transaction without deploying contracts.
-
-**EVM Chains (Ethereum/Plasma)**: Require smart contracts to implement the callback pattern where the protocol calls your code during the loan.
+</div>
 
 ---
 
-## Protocol Information
+## 🚀 What is Capacitor?
 
-### Network
+Capacitor is a **flash loan protocol** that lets you borrow large amounts of crypto with **zero collateral**—as long as you repay within the same transaction. Perfect for arbitrage, liquidations, and advanced DeFi strategies.
 
-| Network | Chain ID | RPC URL |
-|---------|----------|---------|
-| Plasma Testnet | 13473 | https://testnet-rpc.plasma.to |
-| Block Explorer | - | https://testnet.plasmascan.to |
-| Faucet | - | https://gas.zip/faucet/plasma |
+**Key Features:**
+- ⚡ **Zero Upfront Capital** - Borrow up to the pool's liquidity
+- 💰 **Ultra-Low Fees** - Only 0.01% per flash loan
+- 🔒 **Battle-Tested** - Production-ready on Plasma blockchain
+- 🛠️ **Developer-Friendly** - Complete examples in Node.js, Python & Rust
+
+---
+
+## ⚠️ Important: Smart Contract Requirement
+
+**Flash loans require deploying a smart contract.** This isn't a limitation of Capacitor—it's how flash loans work on all EVM chains (Ethereum, Polygon, Plasma, etc.).
+
+### Why You Need a Contract
+
+Flash loans involve three steps in **ONE atomic transaction**:
+1. 📥 **Borrow** tokens from the protocol
+2. 🔄 **Execute** your custom logic (swaps, liquidations, etc.)
+3. 📤 **Repay** the loan + fee
+
+This atomic execution requires smart contract code. Your wallet alone cannot do this.
+
+### Comparison to Other Chains
+
+| Platform | Requirements |
+|----------|-------------|
+| **Kamino (Solana)** | No contract needed - Solana allows composing multiple program instructions |
+| **EVM Chains** | Requires smart contract to implement callback pattern |
+
+---
+
+## 📡 Network & Deployment
+
+### Plasma Testnet
+
+| Resource | Link/Value |
+|----------|------------|
+| **Chain ID** | 13473 |
+| **RPC URL** | https://testnet-rpc.plasma.to |
+| **Block Explorer** | https://testnet.plasmascan.to |
+| **Faucet** | https://gas.zip/faucet/plasma |
 
 ### Deployed Contracts
 
 | Contract | Address |
 |----------|---------|
-| FlashLoanProvider | `0x63A6E3A5743F75388e58e8B778023380694aD3e5` |
-| TUSDT Token | `0xE5aE1FF9c761F581ac4F1d3075e12ae340500C99` |
+| **FlashLoanProvider** | `0x63A6E3A5743F75388e58e8B778023380694aD3e5` |
+| **TUSDT Token** | `0xE5aE1FF9c761F581ac4F1d3075e12ae340500C99` |
 
 ### Fee Structure
 
 - **Flash Loan Fee**: 0.01% (1 basis point)
-- **Fee Split**: 50% to Liquidity Providers | 50% to Protocol
+- **Fee Distribution**: 50% to LPs | 50% to Protocol
 
 **Example:**
 ```
@@ -58,22 +88,22 @@ Distribution:
 
 ---
 
-## Quick Start
+## 🎯 Quick Start
 
-### 1. Get Test Tokens
+### Step 1: Get Test Tokens
 
-Visit [Plasma Faucet](https://gas.zip/faucet/plasma):
-- Request **XPL** for gas fees
-- Request **TUSDT** test tokens
+Visit the [Plasma Faucet](https://gas.zip/faucet/plasma) and request:
+- **XPL** for gas fees
+- **TUSDT** test tokens
 
-### 2. Review Examples
+### Step 2: Review Examples
 
-Examples show complete working implementations:
-- **Node.js** - `examples/nodejs/`
-- **Python** - `examples/python/`
-- **Rust** - `examples/rust/`
+We provide complete working implementations:
+- 📦 **Node.js** - `examples/nodejs/`
+- 🐍 **Python** - `examples/python/`
+- 🦀 **Rust** - `examples/rust/`
 
-### 3. Deploy Your Strategy
+### Step 3: Deploy Your Strategy
 
 ```bash
 # Install dependencies
@@ -89,11 +119,11 @@ node flashloan-complete.cjs
 
 ---
 
-## Integration Patterns
+## 🏗️ Integration Patterns
 
 ### Pattern 1: Deploy Your Strategy Contract
 
-The standard approach - deploy a contract with your custom logic:
+The standard approach—deploy a contract with your custom logic:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -232,107 +262,10 @@ contract MyExistingVault is IFlashLoanReceiver {
 
 ---
 
-## Complete Arbitrage Example
-
-Real-world arbitrage bot that profits from price differences:
-
-```solidity
-contract RealArbitrageBot is IFlashLoanReceiver {
-    address constant FLASH_LOAN_PROVIDER = 0x63A6E3A5743F75388e58e8B778023380694aD3e5;
-    address constant DEX_A = 0x...; // Uniswap
-    address constant DEX_B = 0x...; // SushiSwap
-    address public owner;
-
-    event ArbitrageExecuted(uint256 profit);
-    event ArbitrageFailed(string reason);
-
-    constructor() {
-        owner = msg.sender;
-    }
-
-    function executeOperation(
-        address token,
-        uint256 amount,
-        uint256 fee,
-        bytes calldata params
-    ) external override returns (bool) {
-        require(msg.sender == FLASH_LOAN_PROVIDER, "Unauthorized");
-
-        // Step 1: We now have `amount` tokens
-        uint256 startBalance = IERC20(token).balanceOf(address(this));
-
-        // Step 2: Swap on DEX A (cheaper)
-        uint256 intermediateAmount = _swapOnDexA(token, amount);
-
-        // Step 3: Swap back on DEX B (more expensive)
-        uint256 finalAmount = _swapOnDexB(token, intermediateAmount);
-
-        // Step 4: Check profitability
-        uint256 repayment = amount + fee;
-        require(finalAmount >= repayment, "Not profitable");
-
-        // Step 5: Repay loan
-        IERC20(token).transfer(FLASH_LOAN_PROVIDER, repayment);
-
-        // Step 6: Calculate and log profit
-        uint256 profit = finalAmount - repayment;
-        emit ArbitrageExecuted(profit);
-
-        return true;
-    }
-
-    function findAndExecute() external {
-        require(msg.sender == owner, "Only owner");
-
-        // Check if arbitrage opportunity exists
-        uint256 priceA = _getPriceOnDexA();
-        uint256 priceB = _getPriceOnDexB();
-
-        // Calculate potential profit
-        // (accounting for fees: 0.01% flash loan + DEX fees)
-        if (priceB > priceA * 1.005) { // 0.5% profit margin
-            uint256 optimalAmount = _calculateOptimalAmount(priceA, priceB);
-
-            IFlashLoanProvider(FLASH_LOAN_PROVIDER).flashloan(
-                TUSDT_TOKEN,
-                optimalAmount,
-                ""
-            );
-        }
-    }
-
-    function _swapOnDexA(address token, uint256 amount) internal returns (uint256) {
-        // Actual DEX swap logic here
-        // Return amount received
-    }
-
-    function _swapOnDexB(address token, uint256 amount) internal returns (uint256) {
-        // Actual DEX swap logic here
-        // Return amount received
-    }
-}
-```
-
-**Running the bot:**
-```javascript
-const bot = await ethers.getContractAt("RealArbitrageBot", botAddress);
-
-// Monitor prices and execute when profitable
-setInterval(async () => {
-  try {
-    await bot.findAndExecute();
-    console.log("Arbitrage executed!");
-  } catch (error) {
-    console.log("No opportunity or failed:", error.message);
-  }
-}, 10000); // Check every 10 seconds
-```
-
----
-
-## Use Cases
+## 💡 Use Cases
 
 ### 1. Arbitrage Trading
+
 ```
 Price difference detected:
   DEX A: 1 ETH = 2,000 USDT
@@ -343,10 +276,11 @@ Flash loan execution:
   2. Buy on DEX A: 20,000 USDT → 10 ETH
   3. Sell on DEX B: 10 ETH → 20,100 USDT
   4. Repay: 20,002 USDT
-  5. Profit: 98 USDT
+  5. Profit: 98 USDT ✅
 ```
 
 ### 2. Liquidation Bot
+
 ```
 Undercollateralized position found:
   Debt: 10,000 USDT
@@ -358,10 +292,11 @@ Flash loan execution:
   2. Repay user's debt
   3. Receive 10,500 USDT collateral + 5% bonus = 11,025 USDT
   4. Repay: 10,001 USDT
-  5. Profit: 1,024 USDT
+  5. Profit: 1,024 USDT ✅
 ```
 
 ### 3. Collateral Swap
+
 ```
 Your position:
   Collateral: 50,000 USDC
@@ -374,12 +309,12 @@ Flash loan execution:
   3. Withdraw 50,000 USDC
   4. Swap USDC for ETH
   5. Repay flash loan + fee
-  6. Result: Same debt, but ETH collateral instead of USDC
+  6. Result: Same debt, but ETH collateral instead of USDC ✅
 ```
 
 ---
 
-## Examples
+## 📚 Examples
 
 ### Node.js
 
@@ -417,7 +352,7 @@ cargo run
 
 ---
 
-## API Reference
+## 📖 API Reference
 
 ### IFlashLoanProvider
 
@@ -474,9 +409,9 @@ interface IFlashLoanReceiver {
 
 ---
 
-## Gas Costs
+## ⚙️ Gas Costs
 
-Typical gas usage:
+Typical gas usage on Plasma:
 
 | Operation | Gas Cost |
 |-----------|----------|
@@ -493,7 +428,7 @@ Typical gas usage:
 
 ---
 
-## Security Best Practices
+## 🔒 Security Best Practices
 
 ### 1. Validate the Caller
 
@@ -531,14 +466,14 @@ function executeArbitrage(...) external noReentrant {
 
 ### 4. Test Thoroughly
 
-- Deploy on Plasma testnet first
-- Test with small amounts
-- Verify profitability calculations
-- Check edge cases (slippage, price changes)
+- ✅ Deploy on Plasma testnet first
+- ✅ Test with small amounts
+- ✅ Verify profitability calculations
+- ✅ Check edge cases (slippage, price changes)
 
 ---
 
-## Debugging
+## 🐛 Debugging
 
 ### Check Pool Liquidity
 
@@ -580,7 +515,7 @@ console.log('Profitable:', expectedProfit > totalCosts * 1.2); // 20% margin
 
 ---
 
-## Resources
+## 📚 Additional Resources
 
 - **QUICKSTART.md** - Get started in 5 minutes
 - **ERRORS.md** - Complete error documentation
@@ -589,8 +524,30 @@ console.log('Profitable:', expectedProfit > totalCosts * 1.2); // 20% margin
 
 ---
 
-## License
+## 🌐 Community
+
+Join our growing community of flash loan developers:
+
+- 🌍 **Website**: [capacitor.finance](https://capacitor.finance)
+- 💬 **Discord**: [Join our server](https://discord.gg/JPMrHTUMDX)
+- 🐦 **X (Twitter)**: [@Capacitor-Lending](https://x.com/Capacitor-Lending)
+
+Have questions? Found a bug? Want to share your strategy? We'd love to hear from you!
+
+---
+
+## ⚖️ License
 
 Educational purposes only. Use at your own risk.
 
 **Disclaimer**: Flash loans are powerful financial tools. Test thoroughly on testnet. Ensure strategies are profitable after all fees and gas costs. Smart contract security audits are recommended before mainnet deployment.
+
+---
+
+<div align="center">
+
+**Built with ⚡ by the Capacitor Team**
+
+[capacitor.finance](https://capacitor.finance) | [Discord](https://discord.gg/JPMrHTUMDX) | [X](https://x.com/Capacitor-Lending)
+
+</div>
