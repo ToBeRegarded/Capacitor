@@ -10,7 +10,7 @@ Production flash loan protocol on Plasma blockchain
 
 [![Website](https://img.shields.io/badge/Website-capacitor.finance-blue)](https://capacitor.finance)
 [![Discord](https://img.shields.io/badge/Discord-Join%20Us-7289da)](https://discord.gg/JPMrHTUMDX)
-[![X](https://img.shields.io/badge/X-@Capacitor--Lending-000000)](https://x.com/CapacitorFI)
+[![X](https://img.shields.io/badge/X-@CapacitorFI-000000)](https://x.com/CapacitorFI)
 
 [Quick Start](#-quick-start) • [Documentation](#-integration-patterns) • [Examples](#-examples) • [Community](#-community)
 
