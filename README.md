@@ -58,7 +58,7 @@ This atomic execution requires smart contract code. Your wallet alone cannot do 
 
 | Resource | Link/Value |
 |----------|------------|
-| **Chain ID** | 13473 |
+| **Chain ID** | 9746 |
 | **RPC URL** | https://testnet-rpc.plasma.to |
 | **Block Explorer** | https://testnet.plasmascan.to |
 | **Faucet** | https://gas.zip/faucet/plasma |
